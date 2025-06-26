@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Product API
+  version: 1.0.0
+servers:
+  - description: Test server
+    url: http://localhost:8080
+paths:
+  /products/{id}:
+    get:
+      tags:
+        - products
+      summary: Get product detail for a given product id
+      operationId: getProduct
+      x-spring-cacheable:
+        name: get-product
+      security:
+        - ApiKey:
+            - Product.Read
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product's identifier
+          schema:
+            type: number
+            
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ProductDO'
+  /products:  
+    post:
+      tags:
+        - products
+      summary: Create a product
+      operationId: createProduct
+      requestBody:
+        description: Create a new prodcut in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDO'
+        required: true
+      security:
+        - ApiKey:
+            - Product.Create
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ProductDO'
+components:
+#  securitySchemes:
+#    ApiKey:
+#      type: apiKey
+#      in: header
+#      name: X-API-KEY
+  schemas:
+    ProductDO:
+      description: Product Information
+      type: object
+      properties:
+        id:
+          type: number
+          description: product id
+        name:
+          type: string
+          description: product name
+        price:
+          type: number
+          description: product price value
+        dateCreated:
+          type: string
+          format: date-time
+          description: product creation date

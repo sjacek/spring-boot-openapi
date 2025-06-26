@@ -1,0 +1,7 @@
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+openapi:
+  product:
+    base-path: v1
