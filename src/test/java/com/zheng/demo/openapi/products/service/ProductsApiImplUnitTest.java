@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import com.zheng.demo.openapi.products.api.ProductsApi;
-import com.zheng.demo.openapi.products.api.model.ProductDO;
+import com.zheng.demo.openapi.products.api.model.ProductDTO;
 
 @SpringBootTest
 class ProductsApiImplUnitTest {
@@ -21,7 +21,7 @@ class ProductsApiImplUnitTest {
 	@Test
 	void whenGetProduct_then_success() {
 
-		ResponseEntity<ProductDO> response = api.getProduct(new BigDecimal(1));
+		ResponseEntity<ProductDTO> response = api.getProduct(new BigDecimal(1));
 		assertThat(response).isNotNull();
 
 		assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
@@ -30,10 +30,10 @@ class ProductsApiImplUnitTest {
 
 	@Test
 	void whenCreateProduct_then_success() {
-		ProductDO product = new ProductDO();
+		ProductDTO product = new ProductDTO();
 		product.setName("Test");
 		product.setPrice(new BigDecimal(100));
-		ResponseEntity<ProductDO> response = api.createProduct(product);
+		ResponseEntity<ProductDTO> response = api.createProduct(product);
 		assertThat(response).isNotNull();
 
 		assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();

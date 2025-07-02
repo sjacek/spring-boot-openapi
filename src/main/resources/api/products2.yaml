@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Product API
   version: 1.0.0
@@ -31,7 +31,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/ProductDO'
+                  $ref: '#/components/schemas/ProductDTO'
   /products:  
     post:
       tags:
@@ -43,7 +43,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductDO'
+              $ref: '#/components/schemas/ProductDTO'
         required: true
       security:
         - ApiKey:
@@ -54,7 +54,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/ProductDO'
+                  $ref: '#/components/schemas/ProductDTO'
 components:
 #  securitySchemes:
 #    ApiKey:
@@ -62,7 +62,7 @@ components:
 #      in: header
 #      name: X-API-KEY
   schemas:
-    ProductDO:
+    ProductDTO:
       description: Product Information
       type: object
       properties:

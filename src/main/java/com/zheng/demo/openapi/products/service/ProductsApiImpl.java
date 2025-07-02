@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.zheng.demo.openapi.products.api.ProductsApiDelegate;
-import com.zheng.demo.openapi.products.api.model.ProductDO;
+import com.zheng.demo.openapi.products.api.model.ProductDTO;
 
 @Component
 public class ProductsApiImpl implements ProductsApiDelegate {
@@ -17,9 +17,9 @@ public class ProductsApiImpl implements ProductsApiDelegate {
 	private final Random rnd = new Random();
 
 	@Override
-	public ResponseEntity<ProductDO> getProduct(BigDecimal id) {
+	public ResponseEntity<ProductDTO> getProduct(BigDecimal id) {
 		logger.info("getProduct called");
-		ProductDO prod = new ProductDO();
+		ProductDTO prod = new ProductDTO();
 		prod.setId(id);
 		prod.setName("Product_" + id);
 		prod.setPrice(BigDecimal.valueOf(100.0 + rnd.nextDouble() * 100.0));
@@ -28,7 +28,7 @@ public class ProductsApiImpl implements ProductsApiDelegate {
 	}
 
 	@Override
-	public ResponseEntity<ProductDO> createProduct(ProductDO product) {
+	public ResponseEntity<ProductDTO> createProduct(ProductDTO product) {
 		logger.info("createProduct called");
 		product.setId(BigDecimal.valueOf(rnd.nextDouble() * 10));
 		return ResponseEntity.ok(product);
