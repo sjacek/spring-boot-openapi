@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.zheng.demo.openapi.products.api.v1.model.ProductDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import com.zheng.demo.openapi.products.api.model.ProductDO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductsApplicationIntegrationTest {
@@ -28,8 +27,8 @@ class ProductsApplicationIntegrationTest {
 
 	@Test
 	void whenGetProduct_thenSuccess() {
-		ResponseEntity<ProductDO> response = restTemplate.getForEntity("http://localhost:" + port + "/v1/products/1",
-				ProductDO.class);
+		ResponseEntity<ProductDTO> response = restTemplate.getForEntity("http://localhost:" + port + "/v1/products/1",
+				ProductDTO.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
@@ -38,7 +37,7 @@ class ProductsApplicationIntegrationTest {
 
 		// Call server a few times and collect responses
 		var quotes = IntStream.range(1, 10).boxed()
-				.map((i) -> restTemplate.getForEntity("http://localhost:" + port + "/v1/products/1", ProductDO.class))
+				.map((i) -> restTemplate.getForEntity("http://localhost:" + port + "/v1/products/1", ProductDTO.class))
 				.map(HttpEntity::getBody).collect(Collectors.groupingBy((q -> {
                     Assertions.assertNotNull(q);
                     return q.hashCode();
@@ -49,10 +48,10 @@ class ProductsApplicationIntegrationTest {
 
 	@Test
 	void whenCreateProduct_thenSuccess() {
-		ProductDO product = new ProductDO();
+		ProductDTO product = new ProductDTO();
 		product.setName("TEST");
-		ResponseEntity<ProductDO> response = restTemplate.postForEntity("http://localhost:" + port + "/v1/products",
-				product, ProductDO.class);
+		ResponseEntity<ProductDTO> response = restTemplate.postForEntity("http://localhost:" + port + "/v1/products",
+				product, ProductDTO.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}

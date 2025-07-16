@@ -32,7 +32,27 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/ProductDTO'
-  /products:  
+  /products/:
+    get:
+      tags:
+        - products
+      summary: Get product list
+      operationId: getProducts
+      x-spring-cacheable:
+        name: get-product
+      security:
+        - ApiKey:
+            - Product.Read
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDTO'
+  /products:
     post:
       tags:
         - products

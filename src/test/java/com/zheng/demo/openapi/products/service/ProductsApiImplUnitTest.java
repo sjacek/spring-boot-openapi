@@ -4,13 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
+import com.zheng.demo.openapi.products.api.v1.ProductsApi;
+import com.zheng.demo.openapi.products.api.v1.model.ProductDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
-
-import com.zheng.demo.openapi.products.api.ProductsApi;
-import com.zheng.demo.openapi.products.api.model.ProductDTO;
 
 @SpringBootTest
 class ProductsApiImplUnitTest {

@@ -3,13 +3,12 @@ package com.zheng.demo.openapi.products.service;
 import java.math.BigDecimal;
 import java.util.Random;
 
+import com.zheng.demo.openapi.products.api.v1.ProductsApiDelegate;
+import com.zheng.demo.openapi.products.api.v1.model.ProductDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import com.zheng.demo.openapi.products.api.ProductsApiDelegate;
-import com.zheng.demo.openapi.products.api.model.ProductDTO;
 
 @Component
 public class ProductsApiImpl implements ProductsApiDelegate {
